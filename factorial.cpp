@@ -1,5 +1,6 @@
 //factorial
-
+//version1
+//Jiahong, Ma
 
 #include <iostream>
 #include <cmath>
@@ -79,5 +80,61 @@ void fact(int n)
 int main()
 {
     fact(1000);
+    return 0;
+}
+
+
+//version2
+//Zhuoyin, Xiong
+#include <iostream>
+#include <vector>
+#include <cmath>
+using namespace std;
+vector<int> nums;
+
+int len(int num)
+{
+    int len = 0;
+    while (num)
+    {
+        num /= 10;
+        len++;
+    }
+    return len;
+}
+
+void cal(int n)
+{
+    int carry;
+    int sum;
+    nums.push_back(1);
+    for (int k = 2; k <= n; ++k)
+    {
+        carry = 0;
+        for (int &num : nums)
+        {
+            sum = num * k + carry;
+            carry = (sum / 10);
+            num = (sum % 10);
+        }
+        if (carry != 0)
+        {
+            int mod = 0;
+            for (int i = 0; i < len(carry); ++i)
+            {
+                mod = (carry / int(pow(10, i))) % 10;
+                nums.push_back(mod);
+            }
+        }
+    }
+
+    for (int i = nums.size() - 1; i >= 0; i--)
+    {
+        cout << nums[i];
+    }
+}
+int main()
+{
+    cal(1000);
     return 0;
 }
